@@ -14,6 +14,6 @@ namespace MusicStore.Models
         [StringLength(100, MinimumLength = 2)]
         public string Name { get; set; }
 
-        public List<Album> Albums { get; set; }
+        public virtual List<Album> Albums { get; set; }
     }
 }

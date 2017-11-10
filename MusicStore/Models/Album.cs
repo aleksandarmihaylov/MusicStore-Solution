@@ -13,6 +13,7 @@ namespace MusicStore.Models
         [StringLength(100, MinimumLength = 2)]
         public String Title { get; set; }
 
-        public Artist Artist { get; set; }
+        public int ArtistID { get; set; }
+        public virtual Artist Artist { get; set; }
     }
 }
