@@ -24,6 +24,8 @@ namespace MusicStore.Models
 
             });
 
+            context.Artists.Add(new SoloArtist { Name = "Solo Artist", Instrument = "Piano" });
+
             context.SaveChanges();
         }
     }
