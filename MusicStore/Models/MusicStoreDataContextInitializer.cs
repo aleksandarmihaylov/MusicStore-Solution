@@ -13,7 +13,16 @@ namespace MusicStore.Models
             Artist artist = new Artist() { Name = "First Artist" };
             context.Artists.Add(artist);
 
-            context.Artists.Add(new Artist() { Name = "Second Artist" });
+            context.Albums.Add(new Album() { Artist = artist, Title = "First Album" });
+            context.Albums.Add(new Album() { Artist = artist, Title = "Second Album" });
+
+            context.Albums.Add(new Album()
+            {
+                Artist = context.Artists.Add(new Artist() { Name = "Second Artist" }),
+
+                Title = "Third Album"
+
+            });
 
             context.SaveChanges();
         }

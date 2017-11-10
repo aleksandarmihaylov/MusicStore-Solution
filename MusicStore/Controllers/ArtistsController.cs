@@ -12,6 +12,19 @@ namespace MusicStore.Controllers
     {
         //MusicStoreDataContext context = new MusicStoreDataContext();
         ArtistRepository repository = new ArtistRepository();
+        
+        public ActionResult Details(int id)
+        {
+            Artist artist = repository.Get(id);
+            if(artist == null)
+            {
+                return HttpNotFound();
+            } else
+            {
+                return View(artist);
+            }
+        }
+        
         // GET: Artist
         public ActionResult Index()
         {
