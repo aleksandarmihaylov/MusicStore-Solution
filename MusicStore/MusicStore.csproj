@@ -208,6 +208,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MusicStoreDataContext.cs" />
+    <Compile Include="Models\MusicStoreDataContextInitializer.cs" />
     <Compile Include="Models\Repository\ArtistRepository.cs" />
     <Compile Include="Models\Repository\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
