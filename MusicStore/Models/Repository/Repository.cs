@@ -41,7 +41,7 @@ namespace MusicStore.Models.Repository
             DbSet.Add(entity);
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             context.Entry(entity).State = EntityState.Modified;
         }

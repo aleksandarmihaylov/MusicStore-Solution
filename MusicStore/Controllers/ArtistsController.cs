@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -60,8 +61,12 @@ namespace MusicStore.Controllers
             if (!ModelState.IsValid) return View(artist);
             try
             {
-                repository.Update(artist);
-                repository.SaveChanges();
+                using (TransactionScope scope = new TransactionScope)
+                {
+                    repository.Update(artist);
+                    repository.SaveChanges();
+                    scope.Complete();
+                }
                 return RedirectToAction("Index");
             }
             catch (DbUpdateConcurrencyException)
