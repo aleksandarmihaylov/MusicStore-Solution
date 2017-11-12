@@ -8,6 +8,7 @@ namespace MusicStore.Models.Repository
 {
     public class Repository<T> where T : class
     {
+        private bool disposed = false;
         private MusicStoreDataContext context = null;
         protected DbSet<T> DbSet
         {
@@ -40,9 +41,28 @@ namespace MusicStore.Models.Repository
             DbSet.Add(entity);
         }
 
+        public void Update(T entity)
+        {
+            context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public void Delete(int id)
+        {
+            DbSet.Remove(DbSet.Find(id));
+        }
+
         public void SaveChanges()
         {
             context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            if (!disposed)
+            {
+                context.Dispose();
+                disposed = true;
+            }
         }
     }
 }
