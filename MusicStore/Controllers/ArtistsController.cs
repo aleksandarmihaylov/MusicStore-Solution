@@ -2,6 +2,8 @@
 using MusicStore.Models.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -56,9 +58,18 @@ namespace MusicStore.Controllers
         public ActionResult Edit(Artist artist)
         {
             if (!ModelState.IsValid) return View(artist);
-            repository.Update(artist);
-            repository.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                repository.Update(artist);
+                repository.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                ViewBag.Message = "Sorry, that didn't work!";
+                return View(artist);
+                throw;
+            }
         }
 
         public ActionResult Delete(int id)
